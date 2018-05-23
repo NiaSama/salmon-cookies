@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>Salmon cookies made</head>
-  <h1>For employee view only</h1>
-  <body>
-    <ul id="cookiesPerHour"></ul>
-    <script>
-      var pike = {
-        min: 23,
-        max: 65,
-        avg: 6.3,
-        getRandom: function(min, max) {
-          return (Math.floor(Math.random() * (max - min) + min)) * 6.3;
-        }
-      };
-      //store open from 6am - 8pm, so that is 14 hours
-    </script>
-  </body>
+    <head>
+        <title>Salmon Cookies</title>
+    </head>
+    <body>
+        <h1>Salmon Cookies</h1>
+        <!-- pikeplace -->
+        <h2>First and Pike</h2>
+        <ul id="pikePlaceList"></ul>
+        <!-- SeaTac -->
+        <h2>SeaTac Airport</h2>
+        <ul id="seaTacList"></ul>
+        <!-- Seattle Center -->
+        <h2>Seattle Center</h2>
+        <ul id="seattleCenterList"></ul>
+        <!-- Cap Hill --> 
+        <h2>Capitol Hill</h2>
+        <ul id="capHillList"></ul>
+        <!-- Alki -->
+        <h2>Alki</h2>
+        <ul id="alkiList"></ul>
+        <script type="text/javascript" src="app.js"></script>
+    </body>
 </html>
+
+
 <!-- //1.) Create one object literal that will aggregate data, generate for each hour a number of cookies that need to be baked.
 //2.) Once you have that data you will populate your DOM dynamically
 //3.) With that data you'll create an unordered list.
