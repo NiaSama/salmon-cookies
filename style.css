@@ -13,18 +13,7 @@ html,body {
   text-align: center;
   color: white;
 }
-.seattleImg {
-  background: url('images/city-skyline-693502.jpg') no-repeat center;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 750px;
-}
-.coffeeImg {
-  background: url('images/coffee-3392168.jpg') no-repeat center;
-  background-size: cover;
-  background-attachment: fixed;
-  height: 500px;
-}
+/* Text */
 p {
   opacity: 0.7;
   margin: 50px;
@@ -61,7 +50,19 @@ p {
   border-width: 10px;
   font-family: 'Source Code Pro', monospace;
 }
-
+/* images */
+.seattleImg {
+  background: url('images/city-skyline-693502.jpg') no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 750px;
+}
+.coffeeImg {
+  background: url('images/coffee-3392168.jpg') no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 500px;
+}
 .salmonImg {
   background: url('images/bakery-cookies-delicious-797761.jpg') no-repeat center;
   background-size: cover;
