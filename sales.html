@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Salmon Cookies</title>
-    </head>
-    <body>
-        <h1>Salmon Cookies</h1>
-        <!-- pikeplace -->
-        <h2>First and Pike</h2>
-        <ul id="pikePlaceList"></ul>
-        <!-- SeaTac -->
-        <h2>SeaTac Airport</h2>
-        <ul id="seaTacList"></ul>
-        <!-- Seattle Center -->
-        <h2>Seattle Center</h2>
-        <ul id="seattleCenterList"></ul>
-        <!-- Cap Hill --> 
-        <h2>Capitol Hill</h2>
-        <ul id="capHillList"></ul>
-        <!-- Alki -->
-        <h2>Alki</h2>
-        <ul id="alkiList"></ul>
-        <script type="text/javascript" src="app.js"></script>
-    </body>
-</html>
+
+<head>
+    <title>Table demo</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        thead {color:green}
+        tbody {color:blue;}
+        tfoot {color:red;}
+        
+        table, th, td {
+            border: 1px solid black;
+        }
+        </style>
+</head>
+
+<body>
+    <table id="cookieTable">
+        <thead id="tableHead">
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+        <tfoot id="tableFoot"></tfoot>
+    </table>
+
+    <script src="app.js" type="text/javascript"></script>
+
+</body>
+
