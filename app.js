@@ -20,7 +20,7 @@ function MakeLocation(name, minCust, maxCust, avgCookies) {
 MakeLocation.prototype.calcRanCustByHour = function () {
   for (var i = 0; i < hours.length; i++) {
     this.randomCustPerHour.push(Math.floor(Math.random() * (this.maxCust - this.minCust + 1)) + this.minCust);
-    console.log(this.randomCustPerHour[i]);
+    // console.log(this.randomCustPerHour[i]);
   }
 };
 //calc cookies sold per hour
@@ -33,10 +33,14 @@ MakeLocation.prototype.calcCookiesSoldPerHour = function () {
 //Calc total cookies per store at the end of the day
 MakeLocation.prototype.calcTotalCookiesPerStore = function () {
   for (var k = 0; k < hours.length; k++) {
-    this.totalCookiesPerStore = this.totalCookiesPerStore + this.cookiesSoldPerHour[k];
     this.totalCookiesPerStore += this.cookiesSoldPerHour[k];
   }
 };
+function calcTotalTotal() {
+  for (var n = 0; n < allLocations.length; n++) {
+    totalTotal += allLocations[n].totalCookiesPerStore;
+  }
+}
 
 function newLocations() {
   new MakeLocation('First and Pike', 23, 65, 6.3);
@@ -45,8 +49,15 @@ function newLocations() {
   new MakeLocation('Capitol Hill', 20, 38, 2.3);
   new MakeLocation('Alki', 2, 16, 4.6);
 }
-//creating newLocations to populate into makeLocation that will push into allLocations
-newLocations();
+
+//names of locations and amount of cookies sold per hour
+function fillArray() {
+  for (var a = 0; a < allLocations.length; a++) {
+    allLocations[a].calcRanCustByHour();
+    allLocations[a].calcCookiesSoldPerHour();
+    allLocations[a].calcTotalCookiesPerStore();
+  }
+}
 
 //<tr> <th> </tr> Table head maker
 var tableHeadEl = document.getElementById('tableHead');
@@ -66,11 +77,11 @@ function tableHeadMaker(inputArray) {
 }
 
 //<tr> <td> </tr> Table row maker
-function tableRowMaker(name, inputArray) {
+function tableRowMaker(name, inputArray, totalCookiesPerStore) {
   var tableRowEl = document.getElementById('tableBody');
   var trEl = document.createElement('tr');
-  var nameEl = document.createElement('td');
   //creating an element calling only the name of the locations from the allLocations varaible
+  var nameEl = document.createElement('td');
   nameEl.textContent = name;
   trEl.appendChild(nameEl);
   for (var y = 0; y < inputArray.length; y++) {
@@ -78,19 +89,51 @@ function tableRowMaker(name, inputArray) {
     tdEl.textContent = inputArray[y];
     trEl.appendChild(tdEl);
   }
+  //creating an element calling only the total cookies at each location
+  var totalCookiesEl = document.createElement('td');
+  totalCookiesEl.textContent = totalCookiesPerStore;
+  trEl.appendChild(totalCookiesEl);
+  //attach Table Row Element to the Table in HTML
   tableRowEl.appendChild(trEl);
 }
-//First row contains hours
-tableHeadMaker(hours);
 
-//names of locations and amount of cookies sold per hour
-function fillTable() {
-  for (var a = 0; a < hours.length; a++) {
-    allLocations[a].calcRanCustByHour();
-    allLocations[a].calcCookiesSoldPerHour();
-    allLocations[a].calcTotalCookiesPerStore();
-    tableRowMaker(allLocations[a].name, allLocations[a].cookiesSoldPerHour);
+function fillData() {
+  for (var q = 0; q < allLocations.length; q++) {
+    tableRowMaker(allLocations[q].name, allLocations[q].cookiesSoldPerHour, allLocations[q].totalCookiesPerStore);
   }
-  //Calculate total cookies from all the stores
 }
-fillTable();
+
+//<t-footer> <td> </td> </t-footer> Create Table Footer
+function tableFootMaker(inputArray) {
+  var tableFoot = document.getElementById('tableFoot');
+  var trEl = document.createElement('tr');
+  var textTotalEl = document.createElement('td');
+  textTotalEl.textContent = 'Total';
+  trEl.appendChild(textTotalEl);
+  //for loop in a for loop... allLocation[1-5].cookiesSoldPerHour[hours];
+  for (var b = 0; b < hours.length; b++) { //for loop for the cookieSoldPerHour
+    var hourlyTotal = 0;
+    for (var c = 0; c < inputArray.length; c++) {
+      hourlyTotal += inputArray[c].cookiesSoldPerHour[b];
+      // console.log(hourlyTotal);
+    }
+    var tdEl = document.createElement('td');
+    tdEl.textContent = hourlyTotal;
+    trEl.appendChild(tdEl);
+  }
+  //input array for totalTotal
+
+  var totalTotalEl = document.createElement('td');
+  totalTotalEl.textContent = totalTotal;
+  trEl.appendChild(totalTotalEl);
+  tableFoot.appendChild(trEl);
+}
+
+//creating newLocations to populate into makeLocation that will push into allLocations
+newLocations();
+fillArray();
+calcTotalTotal();
+
+tableHeadMaker(hours);
+fillData();
+tableFootMaker(allLocations); //not correct...
