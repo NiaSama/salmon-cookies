@@ -96,7 +96,7 @@ function fillTable() {
   }
 }
 //<t-footer> <td> </td> </t-footer> Create Table Footer
-function tableFootMaker (inputArray) {
+function tableFootMaker(inputArray) {
   var tableFoot = document.getElementById('tableFoot');
   var trEl = document.createElement('tr');
   var textTotalEl = document.createElement('td');
@@ -107,6 +107,10 @@ function tableFootMaker (inputArray) {
     tdEl.textContent = inputArray[b];
     trEl.appendChild(tdEl);
   }
+//input array for ANSWER
+  var NAMEEl = document.createElement('td');
+  NAMEEl.textContent = 'answer';
+  trEl.appendChild(NAMEEl);
   tableFoot.appendChild(trEl);
 }
 tableHeadMaker(hours);
