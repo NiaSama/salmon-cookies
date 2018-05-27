@@ -4,7 +4,7 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 // array that holds the location objects
 var allLocations = [];
 // variable storing cookies from all stores
-var totalTotal = 0;
+// var totalTotal = 0;
 
 function MakeLocation(name, minCust, maxCust, avgCookies) {
   this.name = name;
@@ -33,7 +33,6 @@ MakeLocation.prototype.calcCookiesSoldPerHour = function () {
 //Calc total cookies per store at the end of the day
 MakeLocation.prototype.calcTotalCookiesPerStore = function () {
   for (var k = 0; k < hours.length; k++) {
-    this.totalCookiesPerStore = this.totalCookiesPerStore + this.cookiesSoldPerHour[k];
     this.totalCookiesPerStore += this.cookiesSoldPerHour[k];
   }
 };
@@ -66,11 +65,11 @@ function tableHeadMaker(inputArray) {
 }
 
 //<tr> <td> </tr> Table row maker
-function tableRowMaker(name, inputArray) {
+function tableRowMaker(name, inputArray, totalCookiesPerStore) {
   var tableRowEl = document.getElementById('tableBody');
   var trEl = document.createElement('tr');
-  var nameEl = document.createElement('td');
   //creating an element calling only the name of the locations from the allLocations varaible
+  var nameEl = document.createElement('td');
   nameEl.textContent = name;
   trEl.appendChild(nameEl);
   for (var y = 0; y < inputArray.length; y++) {
@@ -78,10 +77,14 @@ function tableRowMaker(name, inputArray) {
     tdEl.textContent = inputArray[y];
     trEl.appendChild(tdEl);
   }
+  //creating an element calling only the total cookies at each location
+  var totalCookiesEl = document.createElement('td');
+  totalCookiesEl.textContent = totalCookiesPerStore;
+  trEl.appendChild(totalCookiesEl);
+  //attach Table Row Element to the Table in HTML
   tableRowEl.appendChild(trEl);
 }
 //First row contains hours
-tableHeadMaker(hours);
 
 //names of locations and amount of cookies sold per hour
 function fillTable() {
@@ -89,8 +92,23 @@ function fillTable() {
     allLocations[a].calcRanCustByHour();
     allLocations[a].calcCookiesSoldPerHour();
     allLocations[a].calcTotalCookiesPerStore();
-    tableRowMaker(allLocations[a].name, allLocations[a].cookiesSoldPerHour);
+    tableRowMaker(allLocations[a].name, allLocations[a].cookiesSoldPerHour, allLocations[a].totalCookiesPerStore);
   }
-  //Calculate total cookies from all the stores
 }
+//<t-footer> <td> </td> </t-footer> Create Table Footer
+function tableFootMaker (inputArray) {
+  var tableFoot = document.getElementById('tableFoot');
+  var trEl = document.createElement('tr');
+  var textTotalEl = document.createElement('td');
+  textTotalEl.textContent = 'Total';
+  trEl.appendChild(textTotalEl);
+  for (var b = 0; b < inputArray.length; b++) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = inputArray[b];
+    trEl.appendChild(tdEl);
+  }
+  tableFoot.appendChild(trEl);
+}
+tableHeadMaker(hours);
+tableFootMaker(hours);
 fillTable();
