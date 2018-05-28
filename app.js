@@ -1,4 +1,5 @@
 'use strict';
+//WORKING ON TABLE: 
 // array that holds open hours for the stores
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 // array that holds the location objects
@@ -106,6 +107,7 @@ function fillData() {
 //<t-footer> <td> </td> </t-footer> Create Table Footer
 function tableFootMaker(inputArray) {
   var tableFoot = document.getElementById('tableFoot');
+  tableFoot.innerHTML = '';
   var trEl = document.createElement('tr');
   var textTotalEl = document.createElement('td');
   textTotalEl.textContent = 'Total';
@@ -128,6 +130,36 @@ function tableFootMaker(inputArray) {
   trEl.appendChild(totalTotalEl);
   tableFoot.appendChild(trEl);
 }
+
+//WORKING ON FORMS AND EVENTS
+
+var storeForm = document.getElementById('store-form');
+function handleStoreAdd(event) {
+  event.preventDefault();
+  console.log(event.target.storename.value);
+  if(!event.target.storename.value || !event.target.mincust.value || !event.target.maxcust.value || !event.target.avgcook.value) {
+    return console.log('Fields cannot be empty.');
+  }
+  var userInputLocation = new MakeLocation(event.target.storename.value, event.target.mincust.value, event.target.maxcust.value, event.target.avgcook.value); //userInputLocation is an instance (instances are objects that are made through a constructs)
+  userInputLocation.calcRanCustByHour();
+  userInputLocation.calcCookiesSoldPerHour();
+  userInputLocation.calcTotalCookiesPerStore();
+  //append to table
+  tableRowMaker(userInputLocation.name, userInputLocation.cookiesSoldPerHour, userInputLocation.totalCookiesPerStore);
+  tableFootMaker(allLocations);
+}
+
+storeForm.addEventListener('submit', handleStoreAdd); //function 'handleStoreAdd' does not have () because it is a call back, it will only be called when 'submit' has happened.
+
+
+//storeForm.addEventListener('submit', handleStoreAdd);
+//remember to clear the form by setting the value to null
+
+
+
+
+
+
 
 //creating newLocations to populate into makeLocation that will push into allLocations
 newLocations();
