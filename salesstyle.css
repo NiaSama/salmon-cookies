@@ -1,0 +1,44 @@
+
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+    background-color: #474168;
+}
+
+.Ending {
+    background: url('images/Pike.jpg') no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 400px;
+  }
+  .aurora {
+    background: url('images/architecture-aurora-bridge-boats-23383.jpg') no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 500px;
+  }
+form {
+  padding: 20px;
+  margin: 50 px;
+}
+table {
+  border-collapse: collapse;
+}
+thead {
+    color: green
+}
+
+tbody {
+    color: blue;
+}
+
+tfoot {
+    color: red;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
